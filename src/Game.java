@@ -22,7 +22,8 @@ public class Game {
         }
         return true;
     }
-
+    //check if edge piece
+    //check if corner piece
     private static void makeVisible(int row, int col, Field myField) {
         myField.setVisibleField(row, col, 50);
         int[][] hiddenField = myField.getHiddenField();

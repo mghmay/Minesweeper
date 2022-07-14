@@ -2,12 +2,12 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Field {
-    private double difficultyModifier = 0.02;
-    private int width;
-    private int height;
-    private double difficulty;
-    private int[][] hiddenField;
-    private int[][] visibleField;
+    private final double difficultyModifier = 0.02;
+    private final int width;
+    private final int height;
+    private final double difficulty;
+    private final int[][] hiddenField;
+    private final int[][] visibleField;
 
     Field(double difficulty, int height, int width) {
         this.difficulty = difficulty * difficultyModifier;
