@@ -46,7 +46,7 @@ public class Game {
         if (row != myField.getHeight() - 1) {
             myField.setVisibleField(row + 1, col,  hiddenField[row + 1][col]);
             if (visibleField[row + 1][col] == 0) myField.setVisibleField(row + 1, col, 50);
-            if (col != 9) {
+            if (col != myField.getWidth() - 1) {
                 myField.setVisibleField(row + 1, col + 1, hiddenField[row + 1][col + 1]);
                 if (visibleField[row + 1][col + 1] == 0) myField.setVisibleField(row + 1, col + 1, 50);
             }
@@ -54,8 +54,8 @@ public class Game {
         if (col != 0) {
             myField.setVisibleField(row, col - 1, hiddenField[row][col - 1]);
             if (visibleField[row][col - 1] == 0) myField.setVisibleField(row, col - 1, 50);
-            if (col != 9) {
-                myField.setVisibleField(row + 1, col - 1, hiddenField[row][col - 1]);
+            if (col != myField.getWidth() - 1) {
+                myField.setVisibleField(row + 1, col - 1, hiddenField[row + 1][col - 1]);
                 if (visibleField[row + 1][col - 1] == 0) myField.setVisibleField(row + 1, col - 1, 50);
             }
         }
@@ -157,6 +157,18 @@ public class Game {
                     if(visibleField[row+1][col-1]==0)  myField.setVisibleField(row+1, col-1, 50);
                 }
             }
+        }
+    }
+
+    void floodFill( int x, int y, Field myField ) {
+        if ( myField.getHiddenField()[x][y] != 100 ) {
+            myField.setVisibleField(x, y, myField.getHiddenField()[x][y]);
+            floodFill(x+1, y, myField);
+            floodFill(x-1, y, myField);
+            floodFill(x,y-1, myField );
+            floodFill(x,y-1, myField);
+        } else {
+            return;
         }
     }
 
