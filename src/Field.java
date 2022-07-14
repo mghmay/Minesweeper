@@ -2,53 +2,58 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Field {
-
     private double difficultyModifier = 0.02;
-
     private int width;
     private int height;
     private double difficulty;
     private int[][] hiddenField;
-
     private int[][] visibleField;
 
-    Field(int difficulty, int height, int width) {
+    Field(double difficulty, int height, int width) {
         this.difficulty = difficulty * difficultyModifier;
         this.height = height;
         this.width = width;
-        this.hiddenField = this.generateHiddenField();
-        this.visibleField = this.createVisibleField();
+        this.hiddenField = new int[this.height][this.width];
+        this.visibleField = new int[this.height][this.width];
+
+        generateHiddenField(this.height, this.width);
     }
 
     public int getWidth() {
         return width;
     }
-
     public int getHeight() {
         return height;
     }
-
+    public int[][] getVisibleField() {
+        return this.visibleField;
+    }
+    public void setVisibleField(int y, int x, int payload) {
+        this.visibleField[y][x] = payload;
+    }
     public int[][] getHiddenField() {
         return this.hiddenField;
     }
+    public void setHiddenField(int y, int x, int payload) {
+        this.hiddenField[y][x] = payload;
+    }
 
-    private int[][] generateHiddenField() {
-        this.hiddenField = new int[this.height][this.width];
-        int numOfMines = getNumOfMines();
+    private int[][] generateHiddenField(int height, int width) {
+        int[][] hiddenField = new int[height][width];
+        int numOfMines = generateNumOfMines();
         System.out.println(numOfMines);
         while (numOfMines > 0) {
             Random random = new Random();
-            int x = random.nextInt(this.height);
-            int y = random.nextInt(this.width);
+            int x = random.nextInt(this.width);
+            int y = random.nextInt(this.height);
             System.out.print("x: " + x + " y: " + y);
-            this.hiddenField[x][y] = 100;
+            setHiddenField(y, x,  100);
             numOfMines--;
         }
-        getFieldNumbers();
-        return this.hiddenField;
+        generateFieldNumbers();
+        return hiddenField;
     }
-
-    private void getFieldNumbers(){
+    private void generateFieldNumbers() {
         for (int y = 0; y < this.height; y++) {
             for (int x = 0; x < this.width; x++) {
                 int mineCount = 0;
@@ -82,27 +87,12 @@ public class Field {
             }
         }
     }
-
-    private int getNumOfMines() {
+    private int generateNumOfMines() {
         int area = this.height * this.width;
         double numOfMines = area * this.difficulty;
 
         return (int) numOfMines;
     }
-
-    public int[][] getVisibleField() {
-        return this.visibleField;
-    }
-
-    public void setVisibleField(int x, int y, int payload) {
-        this.visibleField[y][x] = payload;
-    }
-
-    private int[][] createVisibleField() {
-        this.visibleField = new int[this.height][this.width];
-        return this.visibleField;
-    }
-
     public int[][] generateVisibleField() {
         System.out.println("\t ");
         for (int i = 0; i < this.width; i++) {
