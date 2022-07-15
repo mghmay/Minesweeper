@@ -18,19 +18,4 @@ public class Display {
         } while (number < greaterThan || number > lessThan);
         return number;
     }
-
-//    public static int[] getHeightWidth(int greaterThan, int lessThan) {
-//        System.out.println("Pick a grid height (whole integer greater than 10 and less than 100)");
-//        int height = validateInteger(greaterThan, lessThan);
-//
-//        System.out.println("Pick a grid width (whole integer greater than 10 and less than 100)");
-//        int width = validateInteger(greaterThan, lessThan);
-//
-//        return new int[]{height, width};
-//    }
-//
-//    public static int getDifficulty(int greaterThan, int lessThan) {
-//        System.out.println("Pick a difficulty (from 1 to 10, 10 being the most difficult)");
-//        return validateInteger(greaterThan, lessThan);
-//    }
 }

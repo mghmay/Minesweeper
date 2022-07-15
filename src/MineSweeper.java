@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.Arrays;
 
 public class MineSweeper {
@@ -7,6 +8,11 @@ public class MineSweeper {
     private int diffGreaterThan;
 
     public MineSweeper() {}
+
+    public static void main(String[] args) {
+        MineSweeper newMS = new MineSweeper();
+        newMS.startGame();
+    }
 
     public int getHwGreaterThan() {
         return this.hwGreaterThan;
@@ -33,10 +39,6 @@ public class MineSweeper {
         this.diffGreaterThan = diffGreaterThan;
     }
 
-    public static void  main(String[] args) {
-        MineSweeper newMS = new MineSweeper();
-        newMS.startGame();
-    }
     public void startGame() {
         setHwGreaterThan(10);
         setHwLessThan(50);
@@ -57,6 +59,7 @@ public class MineSweeper {
         Game myGame = new Game();
         Field myField = new Field(difficulty, height, width);
 
+
         boolean playing = true;
         while (playing) {
             myField.generateVisibleField();
@@ -67,6 +70,8 @@ public class MineSweeper {
             System.out.println("Column");
             int col = Display.validateInteger(0, myField.getWidth() - 1);
 
+
+
             playing = myGame.makeMove(row, col, myField);
             if (myGame.checkWin(myField)) {
                 myGame.displayHidden(myField);
@@ -75,11 +80,3 @@ public class MineSweeper {
         }
     }
 }
-
-
-//            int[][] hiddenField = myField.getHiddenField();
-//            for (int i = 0; i < 9; i++) {
-//                System.out.print(Arrays.toString(hiddenField[i]));
-//            }
-//            myField.getHiddenField();
-//            System.out.println("\nRow");
